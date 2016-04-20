@@ -6,6 +6,10 @@
 	require_once("../dbconn.inc");
 	
 	//创建目录
+	if(!file_exists("../../save/"))
+	{
+		mkdir("../../save/");
+	}
 	$fp = opendir("../../save");
 	$destination="";
 	
