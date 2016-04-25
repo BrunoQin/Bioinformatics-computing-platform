@@ -32,7 +32,7 @@
 	$chdir_t = ftp_chdir($conn,$t);
 	
 	//上传文件
-	$upload = ftp_put($conn,"2016.txt",$_FILES["file"]["tmp_name"],FTP_ASCII);
+	$upload = ftp_put($conn,$user_num.time().".txt",$_FILES["file"]["tmp_name"],FTP_ASCII);
 	if(!$upload)
 	{
 		echo "<script language='javascript'>";
