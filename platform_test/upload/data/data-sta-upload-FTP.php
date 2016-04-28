@@ -1,4 +1,7 @@
 <?php
+
+	error_reporting(1);
+
 	//获取当前用户信息
 	$user_num = $_SESSION["number"];
 	
@@ -7,6 +10,12 @@
 		
 	//获取时间戳
 	$t = time();
+	
+	//获取上传文件名、扩展名以及所选数据库编号
+	$f_name = $_FILES["file"]["name"];
+	$f_path = pathinfo($f_name);
+	$f_type = $f_path[extension];
+	$db_num = $_POST["database"];
 	
 	//连接FTP服务器
 	$conn = ftp_connect("169.254.225.30");
@@ -26,24 +35,32 @@
 		echo "</script>";
 	}
 	
+	//打开FTP被动模式
+	$pasv = ftp_pasv($conn,true);
+	
 	//创建并打开个人文件夹
 	$mkdir = ftp_mkdir($conn,$user_num);
 	$chdir = ftp_chdir($conn,$user_num);
 	
-	//创建并打开数据库目录
-	$mkdir_d = ftp_mkdir($conn,"DB");
-	$chdir_d = ftp_chdir($conn,"DB");
+	//创建并打开计算文件目录
+	$mkdir_d = ftp_mkdir($conn,"RAW");
+	$chdir_d = ftp_chdir($conn,"RAW");
 	
 	//创建并打开本次上传文件夹（以时间戳命名）
 	$mkdir_t = ftp_mkdir($conn,$t);
 	$chdir_t = ftp_chdir($conn,$t);
 	
 	//上传文件
-	$upload = ftp_put($conn,$user_num."-".$t.".txt",$_FILES["file"]["tmp_name"],FTP_ASCII);
+	$upload = ftp_put($conn,$user_num."-".$t.".RAW",$_FILES["file"]["tmp_name"],FTP_BINARY);
+	
+	//临时文件信息
+	$up_err = $_FILES["file"]["error"];
+	$up_size = $_FILES["file"]["size"];
+	
 	if(!$upload)
 	{
 		echo "<script language='javascript'>";
-		echo "alert('UPLOAD FAILED!');";
+		echo "alert('UPLOAD FAILED!\terror:".$up_err."');";
 		echo "</script>";
 	}
 	else
@@ -51,23 +68,30 @@
 		$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
 		mysql_select_db($DBNAME); 		//选择数据库
 		$init=mysql_query("set name utf8");
-		$str="insert into datab values(NULL,'$number',NULL,'0')";
+		
+		//插入上传信息
+		$str="insert into raw values(NULL,'$user_num','$f_name','".$t."','".$db_num."')";
 		$result=mysql_query($str, $linker); //执行查询
+		
+		//数据库使用次数加一
+		$str2="update datab set used=used+1 where num='$db_num'";
+		$result2=mysql_query($str2,$linker);
 		mysql_close($linker);
 		
+		
 		echo "<script language='javascript'>";
-		echo "alert('UPLOAD SUCCESSFUL!');";
+		echo "alert('UPLOAD SUCCESSFUL!\tsize:".$up_size."');";
 		echo "</script>";
 		
 		$fp = fopen("../../FTPsave/".$user_num."/DB/parameters.txt");
-		file_put_contents("../../FTPsave/".$user_num."/DB/".$t."/parameters.txt",implode(",",$_POST['check']));
+		file_put_contents("../../FTPsave/".$user_num."/DB/".$t."/para.txt",implode(",",$_POST['check']));
 	}
 	
 	//断开FTP连接
 	ftp_quit($conn);
 
 	echo "<script language='javascript'>";
-	echo "location='../../DBupload.html'";
+	echo "location='../../data-upload-static.php'";
 	echo "</script>";
 
 ?>
