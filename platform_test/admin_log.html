@@ -17,15 +17,15 @@
   <div class="middle-login">
     <div class="block-flat">
       <div class="header">
-        <h3 class="text-center"><img src="assets/img/logo.png" alt="logo" class="logo-img">Platform-test</h3>
+        <h3 class="text-center"><img src="assets/img/logo.png" alt="logo" class="logo-img">Platform-test(admin)</h3>
       </div>
       <div>
-        <form style="margin-bottom: 0px !important;" action="user/usercheck.php" method="post" class="form-horizontal">
+        <form style="margin-bottom: 0px !important;" action="admin/admin_check.php" method="post" class="form-horizontal">
           <div class="content">
             <div class="form-group">
               <div class="col-sm-12">
                 <div class="input-group"><span class="input-group-addon"><i class="fa fa-certificate"></i></span>
-                  <input id="number" name="number" type="text" placeholder="学工号" class="form-control">
+                  <input id="aid" name="aid" type="text" placeholder="管理员账户" class="form-control">
                 </div>
               </div>
             </div>
@@ -39,7 +39,7 @@
           </div>
           <div class="foot">
           	<a href="register.html" class="btn btn-default">注册</a>
-            <a href="admin_log.html" class="btn btn-default">管理员登陆入口</a>
+            <a href="login.html" class="btn btn-default">普通用户登陆入口</a>
           	<input type="submit" class="btn btn-primary" name="button" id="button" value="登录" onClick="return eg.logCheck();"/>
           </div>
         </form>

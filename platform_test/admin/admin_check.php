@@ -1,7 +1,7 @@
 <?php
 	header("Content-type: text/html; charset=utf-8");
 
-	$number=$_POST["number"];
+	$aid=$_POST["aid"];
 	
 	require_once("../sysconf.inc");
 	
@@ -11,26 +11,26 @@
 	mysql_select_db($DBNAME);
 	
 	//查询是否存在相应信息
-	$str="select pwd from users where number ='$number'";
+	$str="select ad_num,pwd from admin where aid ='$aid'";
 	$result=mysql_query($str,$linker);
 	
-	list($password)=mysql_fetch_row($result);
+	list($anum,$password)=mysql_fetch_row($result);
 	//如果密码输入正确
 	if($password==$_POST["pwd"])
 	{
-		$_SESSION["number"]=$number;
+		$_SESSION["anum"]=$anum;
 		
 		//转到个人页面	
 		echo "<script language='javascript'>";	
-		echo "location='../index.php?number=".$number."';";
+		echo "location='../admin_work.php?anum=".$anum."';";
 		echo "</script>";
 	}
 	//密码输入错误
 	else
 	{
 		echo "<script language='javascript'>";	
-		echo "alert('用户信息输入有误！');";
-		echo"location='../login.html';";
+		echo "alert('管理员信息输入有误！');";
+		echo"location='../admin_log.html';";
 		echo "</script>";
 	}
 	mysql_close($linker);

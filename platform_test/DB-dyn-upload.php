@@ -25,28 +25,32 @@
       <a href="#" class="navbar-brand"><span>Platform-test</span></a></div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right user-nav">
-        <li class="dropdown profile_menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><img alt="Avatar" src="assets/img/avatar2.jpg"><span>Jeff Hanneman</span><b class="caret"></b></a>
+        <li class="dropdown profile_menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle">
+        <i class="fa fa-user"></i>
+        <span>
+        <?php
+					$number=$_SESSION["number"];
+	
+					require_once("sysconf.inc");
+					
+					//连接数据库
+					$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			
+					//选择数据库
+					mysql_select_db($DBNAME);
+					
+					//查询是否存在相应信息
+					$str="select name from users where number ='$number'";
+					$result=mysql_query($str,$linker);
+					list($name)=mysql_fetch_row($result);
+					echo "$name";
+        ?>
+        </span>
+        <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Messages</a></li>
+            <li><a href="#">个人信息</a></li>
+            <li><a href="#">上传记录</a></li>
             <li class="divider"></li>
-            <li><a href="#">Sign Out</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right not-nav">
-        <li class="button dropdown"><a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-globe"></i><span class="bubble">1</span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="nano nscroller">
-                <div class="content">
-                  <ul>
-                    <li><a href="#"><i class="fa fa-cloud-upload info"></i>计算已完成<span class="date">5小时前.</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+            <li><a href="user/userlgout.php">注销</a></li>
           </ul>
         </li>
       </ul>
@@ -60,17 +64,19 @@
       <div class="menu-space">
         <div class="content">
           <ul class="cl-vnavigation">
-            <li><a href="index.html"><i class="fa fa-list-alt"></i><span>主页</span></a>
+            <li><a href="index.php"><i class="fa fa-list-alt"></i><span>主页</span></a>
             </li>
-            <li><a href="DBupload.html"><i class="fa fa-home"></i><span>上传数据库</span></a>
+            <li><a href="DBupload.php"><i class="fa fa-home"></i><span>上传数据库</span></a>
+            </li>
+            <li><a href="DBdel.php"><i class="fa fa-home"></i><span>管理个人数据库</span></a>
             </li>
             <li><a href="#"><i class="fa fa-smile-o"></i><span>上传计算文件</span></a>
            	  <ul class="sub-menu">
                 <li><a href="data-upload-static.php">固定参数</a></li>
-                <li><a href="data-upload-dynamic.html">动态参数</a></li>
+                <li><a href="data-upload-dynamic.php">动态参数</a></li>
               </ul>
             </li>
-            <li><a href="molecule-level.html"><i class="fa fa-list-alt"></i><span>分子级分析</span></a>
+            <li><a href="molecule-level.php"><i class="fa fa-list-alt"></i><span>分子级分析</span></a>
             </li>
           </ul>
         </div>
@@ -86,7 +92,7 @@
               <h3>数据库上传及参数设置</h3>
             </div>
             <div class="content">
-              <form action="upload/db/db-upload.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
+              <form action="upload/db/db-dyn-upload.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
                 <div class="form-group">
                   <label class="col-sm-3 control-label">文件路径</label>
                   <div class="col-sm-6">
@@ -132,8 +138,8 @@
                         CoenzymeA</label>
                     </div>
                   </div>
-                  <button type="submit" class="btn btn-primary">提交</button>
                 </div>
+                <button type="submit" class="btn btn-primary">提交</button>
               </form>
             </div>
           </div>

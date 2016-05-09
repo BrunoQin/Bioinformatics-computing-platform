@@ -89,7 +89,7 @@
               <h3>计算文件上传（静态参数）</h3>
             </div>
             <div class="content">
-              <form action="upload/data/data-sta-upload-FTP.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
+              <form action="upload/data/data-dyn-upload.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
                 <div class="form-group">
                   <label class="col-sm-3 control-label">文件路径</label>
                   <div class="col-sm-6">
@@ -108,7 +108,7 @@
 						//系统配置文件
 						require_once("sysconf.inc");
 		
-					  	$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
+					  $linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
 						mysql_select_db($DBNAME); 		//选择数据库
 						$str="select * from datab where owner = '$user_num'";
 						$result=mysql_query($str, $linker); //执行查询
@@ -127,6 +127,46 @@
 						
 					  ?>
                     </select>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="col-sm-3 control-label">Checkbox</label>
+                  <div class="col-sm-6">
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="0" class="icheck">
+                        Phospho</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="1" class="icheck">
+                        Acetyl</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="2" class="icheck">
+                        FormylMet</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="3" class="icheck">
+                        Succinyl</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="4" class="icheck">
+                        Meghyl</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="5" class="icheck">
+                        Microcin</label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                        <input type="checkbox" name="check[]" value="6" class="icheck">
+                        CoenzymeA</label>
+                    </div>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary">提交</button>

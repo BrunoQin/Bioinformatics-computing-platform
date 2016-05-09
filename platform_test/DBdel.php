@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="assets/lib/font-awesome/css/font-awesome.min.css">
 <!--if lt IE 9script(src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js')-->
 <link rel="stylesheet" type="text/css" href="assets/lib/jquery.nanoscroller/css/nanoscroller.css">
-<link rel="stylesheet" type="text/css" href="assets/lib/dropzone/dist/dropzone.css">
+<link rel="stylesheet" type="text/css" href="assets/lib/jquery.datatables/plugins/bootstrap/3/dataTables.bootstrap.css"/>
 <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
@@ -82,65 +82,66 @@
   </div>
   <div id="pcont" class="container-fluid">
     <div class="cl-mcont">
-      <div class="row">
+    	<div class="row">
         <div class="col-md-12">
           <div class="block-flat">
             <div class="header">
-              <h3>计算文件上传（静态参数）</h3>
+              <h3>个人数据库列表</h3>
             </div>
             <div class="content">
-              <form action="upload/data/data-sta-upload-FTP.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">文件路径</label>
-                  <div class="col-sm-6">
-                    <input name="file" type="file" placeholder="文件路径" class="form-control">
-                  </div>
-                </div>
-                <div class="form-group">
-                  <label class="col-sm-3 control-label">选择数据库</label>
-                  <div class="col-sm-6">
-                    <select name="database" class="form-control">
-                      <?php
-                      
-					  	//获取当前用户信息
-						$user_num = $_SESSION["number"];
-						
-						//系统配置文件
-						require_once("sysconf.inc");
-		
-					  	$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
-						mysql_select_db($DBNAME); 		//选择数据库
-						$str="select * from datab where owner = '$user_num'";
-						$result=mysql_query($str, $linker); //执行查询
-						
-						while($row = mysql_fetch_array($result))
-						{
-							$db_time = $row["time"];
-							$db_date = date("Y-m-d H:i:s",$db_time);
-							$db_name = $row["name"];
-							$db_num = $row["num"];
-							
-							echo "<option value='".$db_num."'>".$db_name."\t\t".$db_date."</option>";
-						}
-						
-						mysql_close($linker);
-						
-					  ?>
-                    </select>
-                  </div>
-                </div>
-                <button type="submit" class="btn btn-primary">提交</button>
-              </form>
+            	<div>
+								<?php
+									$unum=$_SESSION["number"];
+								
+                  require_once("sysconf.inc");
+    
+                  //连接数据库
+                  $linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			
+                  //选择数据库
+                  mysql_select_db($DBNAME);
+                  
+                  echo "<table id=\"datatable\" class=\"table table-bordered\">";
+									echo "<thead>";
+									echo "<tr>";
+									echo "<th>数据库编号</th>";
+									echo "<th>文件名</th>";
+									echo "<th>上传时间</th>";
+									echo "<th>操作</th>";
+									echo "</tr>";
+									echo "</thead>";
+									echo "<tbody>";
+									
+									$str="select num,name,time from datab where owner='$unum'";
+									$result=mysql_query($str,$linker);
+									
+									while($row=mysql_fetch_array($result))
+									{
+										$t=date("Y-m-d h:m:s",$row["time"]);
+										
+										echo "<tr class=\"odd gradeX\">";
+                    echo "<td>".$row["num"]."</td>";
+                    echo "<td>".$row["name"]."</td>";
+                    echo "<td>".$t."</td>";
+                    echo "<td><a class=\"btn btn-default btn-xs\" href=\"admin/uDBdel.php?num=".$row["num"]."\" data-toggle=\"tooltip\"><i class=\"fa fa-times\"></i>删除</a></td>";
+                    echo "</tr>";
+									}
+									echo "</tbody>";
+									echo "</table>";
+									
+									mysql_close($linker);
+                ?>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+       	</div>
+    	</div>
     </div>
   </div>
 </div>
-<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script><script type="text/javascript" src="assets/lib/jquery.nanoscroller/javascripts/jquery.nanoscroller.js"></script><script type="text/javascript" src="assets/js/cleanzone.js"></script><script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script><script src="assets/lib/dropzone/dist/dropzone_data.js" type="text/javascript"></script><script type="text/javascript">$(document).ready(function(){
+<script type="text/javascript" src="assets/lib/jquery/jquery.min.js"></script><script type="text/javascript" src="assets/lib/jquery.nanoscroller/javascripts/jquery.nanoscroller.js"></script><script type="text/javascript" src="assets/js/cleanzone.js"></script><script src="assets/lib/bootstrap/dist/js/bootstrap.min.js"></script><script src="assets/lib/jquery.datatables/js/jquery.dataTables.min.js" type="text/javascript"></script><script src="assets/lib/jquery.datatables/plugins/bootstrap/3/dataTables.bootstrap.js" type="text/javascript"></script><script type="text/javascript">$(document).ready(function(){
 	//initialize the javascript
 	App.init();
+	App.dataTables();
 });</script>
 </body>
 </html>

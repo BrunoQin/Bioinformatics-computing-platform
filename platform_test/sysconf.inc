@@ -5,6 +5,6 @@
 	$DBPWD="112358";
 	$DBNAME="platform_test";
 	
-	//每页显示记录数
-	$PAGE_MAX_LINE=5; 
+	//IP地址
+	$IP_ADDR="169.254.225.30";
 ?>

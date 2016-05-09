@@ -6,7 +6,7 @@
 	$user_num = $_SESSION["number"];
 	
 	//系统配置文件
-	require_once("../../dbconn.inc");
+	require_once("../../sysconf.inc");
 		
 	//获取时间戳
 	$t = time();
@@ -18,7 +18,7 @@
 	$db_num = $_POST["database"];
 	
 	//连接FTP服务器
-	$conn = ftp_connect("169.254.225.30");
+	$conn = ftp_connect($IP_ADDR);
 	if(!$conn)
 	{
 		echo "<script language='javascript'>";
@@ -70,7 +70,7 @@
 		$init=mysql_query("set name utf8");
 		
 		//插入上传信息
-		$str="insert into raw values(NULL,'$user_num','$f_name','".$t."','".$db_num."')";
+		$str="insert into raw values(NULL,'$user_num','$f_name','".$t."','".$db_num."','0','0')";
 		$result=mysql_query($str, $linker); //执行查询
 		
 		//数据库使用次数加一
@@ -82,9 +82,6 @@
 		echo "<script language='javascript'>";
 		echo "alert('UPLOAD SUCCESSFUL!\tsize:".$up_size."');";
 		echo "</script>";
-		
-		$fp = fopen("../../FTPsave/".$user_num."/DB/parameters.txt");
-		file_put_contents("../../FTPsave/".$user_num."/DB/".$t."/para.txt",implode(",",$_POST['check']));
 	}
 	
 	//断开FTP连接

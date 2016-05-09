@@ -16,7 +16,7 @@
 	}
 	else
 	{
-		require_once("../dbconn.inc");	//系统配置文件
+		require_once("../sysconf.inc");	//系统配置文件
 		
 		$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
 		mysql_select_db($DBNAME); 		//选择数据库
