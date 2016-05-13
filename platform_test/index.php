@@ -43,7 +43,7 @@
         </span>
         <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">个人信息</a></li>
+            <li><a href="personal.php">个人信息</a></li>
             <li><a href="#">上传记录</a></li>
             <li class="divider"></li>
             <li><a href="user/userlgout.php">注销</a></li>
@@ -60,19 +60,19 @@
       <div class="menu-space">
         <div class="content">
           <ul class="cl-vnavigation">
-            <li><a href="index.php"><i class="fa fa-list-alt"></i><span>主页</span></a>
+            <li><a href="index.php"><i class="fa fa-home"></i><span>主页</span></a>
             </li>
-            <li><a href="DBupload.php"><i class="fa fa-home"></i><span>上传数据库</span></a>
+            <li><a href="DBupload.php"><i class="fa fa-hdd-o"></i><span>上传数据库</span></a>
             </li>
-            <li><a href="DBdel.php"><i class="fa fa-home"></i><span>管理个人数据库</span></a>
+            <li><a href="DBdel.php"><i class="fa fa-cogs"></i><span>管理个人数据库</span></a>
             </li>
-            <li><a href="#"><i class="fa fa-smile-o"></i><span>上传计算文件</span></a>
+            <li><a href="#"><i class="fa fa-cloud-upload"></i><span>上传计算文件</span></a>
            	  <ul class="sub-menu">
                 <li><a href="data-upload-static.php">固定参数</a></li>
                 <li><a href="data-upload-dynamic.php">动态参数</a></li>
               </ul>
             </li>
-            <li><a href="molecule-level.php"><i class="fa fa-list-alt"></i><span>分子级分析</span></a>
+            <li><a href="extra.php"><i class="fa fa-flash"></i><span>分子级分析</span></a>
             </li>
           </ul>
         </div>

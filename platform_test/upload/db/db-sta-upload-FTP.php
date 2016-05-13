@@ -1,9 +1,11 @@
 <?php
+	header("Content-type: text/html; charset=utf-8");
 
-	//error_reporting(1);
+	error_reporting(1);
 
 	//获取当前用户信息
 	$user_num = $_SESSION["number"];
+	$err_num = 0;
 	
 	//系统配置文件
 	require_once("../../sysconf.inc");
@@ -19,18 +21,14 @@
 	$conn = ftp_connect($IP_ADDR);
 	if(!$conn)
 	{
-		echo "<script language='javascript'>";
-		echo "alert('CONNECT FAILED!');";
-		echo "</script>";
+		$err_num = 0;
 	}
 	
 	//登录FTP
 	$login = ftp_login($conn,"bio","123456");
 	if(!$login)
 	{
-		echo "<script language='javascript'>";
-		echo "alert('LOGIN FAILED!');";
-		echo "</script>";
+		$err_num = 1;
 	}
 	
 	//打开FTP被动模式
@@ -57,8 +55,9 @@
 	
 	if(!$upload)
 	{
+		$err_num = 2;
 		echo "<script language='javascript'>";
-		echo "alert('UPLOAD FAILED!\terror:".$up_err."');";
+		echo "alert('UPLOAD FAILED!\terror:".$err_num."');";
 		echo "</script>";
 	}
 	else
@@ -70,6 +69,10 @@
 		//插入上传信息
 		$str="insert into datab values(NULL,'$user_num','$f_name','$t','0')";
 		$result=mysql_query($str, $linker); //执行查询
+				
+		$str2="update users set dnum=dnum+1 where number ='$number'";
+		$result2=mysql_query($str2,$linker);
+		mysql_close($linker);
 				
 		echo "<script language='javascript'>";
 		echo "alert('UPLOAD SUCCESSFUL!');";

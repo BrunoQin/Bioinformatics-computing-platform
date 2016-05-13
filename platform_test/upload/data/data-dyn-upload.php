@@ -1,9 +1,11 @@
 <?php
+	header("Content-type: text/html; charset=utf-8");
 
 	error_reporting(1);
 
 	//获取当前用户信息
 	$user_num = $_SESSION["number"];
+	$err_num = 0;
 	
 	//系统配置文件
 	require_once("../../sysconf.inc");
@@ -17,22 +19,41 @@
 	$f_type = $f_path[extension];
 	$db_num = $_POST["database"];
 	
+	//获取参数
+	$PAT = $_POST["PAT"];
+	$FAT = $_POST["FAT"];
+	$IPMD = $_POST["IPMD"];
+	$IPMD2 = $_POST["IPMD2"];
+	$IPACO = $_POST["IPACO"];
+	$IPACO2 = $_POST["IPACO2"];
+	$IPMDO = $_POST["IPMDO"];
+	$IPMDO2 = $_POST["IPMDO2"];
+	$IPADOM = $_POST["IPADOM"];
+	$IPADOM2 = $_POST["IPADOM2"];
+	$IPAD = $_POST["IPAD"];
+	$IPAD2 = $_POST["IPAD2"];
+	$IPADO = $_POST["IPADO"];
+	$IPADO2 = $_POST["IPADO2"];
+	$IPADOM = $_POST["IPADOM"];
+	$IPADOM2 = $_POST["IPADOM2"];
+	$Window = $_POST["Window"];
+	$PMFs = $_POST["PMFs"];
+	$PTM_Score = $_POST["PTM_Score"];
+	$Spectrum_Range = $_POST["Spectrum_Range"];
+	$Spectrum_Range2 = $_POST["Spectrum_Range2"];
+	
 	//连接FTP服务器
 	$conn = ftp_connect($IP_ADDR);
 	if(!$conn)
 	{
-		echo "<script language='javascript'>";
-		echo "alert('CONNECT FAILED!');";
-		echo "</script>";
+		$err_num = 0;
 	}
 	
 	//登录FTP
 	$login = ftp_login($conn,"bio","123456");
 	if(!$login)
 	{
-		echo "<script language='javascript'>";
-		echo "alert('LOGIN FAILED!');";
-		echo "</script>";
+		$err_num = 1;
 	}
 	
 	//打开FTP被动模式
@@ -59,8 +80,9 @@
 	
 	if(!$upload)
 	{
+		$err_num = 2;
 		echo "<script language='javascript'>";
-		echo "alert('UPLOAD FAILED!\terror:".$up_err."');";
+		echo "alert('UPLOAD FAILED!\terror:".$err_num."');";
 		echo "</script>";
 	}
 	else
@@ -70,20 +92,26 @@
 		$init=mysql_query("set name utf8");
 		
 		//插入上传信息
-		$str="insert into raw values(NULL,'$user_num','$f_name','".$t."','".$db_num."','1','0')";
+		$str="insert into raw values(NULL,'$user_num','$f_name','$t','$db_num','1','0')";
 		$result=mysql_query($str, $linker); //执行查询
 		
 		//数据库使用次数加一
 		$str2="update datab set used=used+1 where num='$db_num'";
 		$result2=mysql_query($str2,$linker);
+				
+		$str3="update users set rnum=rnum+1 where number ='$number'";
+		$result3=mysql_query($str3,$linker);
 		mysql_close($linker);
 		
 		echo "<script language='javascript'>";
 		echo "alert('UPLOAD SUCCESSFUL!\tsize:".$up_size."');";
 		echo "</script>";
 		
-		$fp = fopen("../../FTPsave/".$user_num."/RAW/parameters.txt");
-		file_put_contents("../../FTPsave/".$user_num."/RAW/".$t."/para.txt",implode(",",$_POST['check']));
+		//记录参数
+		$fp = fopen("../../FTPsave/".$user_num."/RAW/".$t."/para.txt");
+		$para = "PAT\t".$PAT."\nFAT\t".$FAT."\nIPMD\t".$IPMD."\nIPMD2\t".$IPMD2."\nIPACO\t".$IPACO."\nIPACO2\t".$IPACO2."\nIPMDO\t".$IPMDO."\nIPMDO2\t".$IPMDO2."\nIPMDOM\t".$IPMDOM."\nIPMDOM2\t".$IPMDOM2."\nIPAD\t".$IPAD."\nIPAD2\t".$IPAD2."\nIPADO\t".$IPADO."\nIPADO2\t".$IPADO2."\nIPADOM\t".$IPADOM."\nIPADOM2\t".$IPADOM2."\nWindow\t".$Window."\nPMFs\t".$PMFs."\nPTM_Score\t".$PTM_Score."\nSpectrum_Range\t".$Spectrum_Range."\nSpectrum_Range2\t".$Spectrum_Range2."\n#";//参数字符串，以#结束
+		fwrite($fp,$para);
+		fclose($fp);
 	}
 	
 	//断开FTP连接

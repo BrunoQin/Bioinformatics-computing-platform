@@ -44,7 +44,7 @@
         </span>
         <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">个人信息</a></li>
+            <li><a href="personal.php">个人信息</a></li>
             <li><a href="#">上传记录</a></li>
             <li class="divider"></li>
             <li><a href="user/userlgout.php">注销</a></li>
@@ -61,19 +61,19 @@
       <div class="menu-space">
         <div class="content">
           <ul class="cl-vnavigation">
-            <li><a href="index.php"><i class="fa fa-list-alt"></i><span>主页</span></a>
+            <li><a href="index.php"><i class="fa fa-home"></i><span>主页</span></a>
             </li>
-            <li><a href="DBupload.php"><i class="fa fa-home"></i><span>上传数据库</span></a>
+            <li><a href="DBupload.php"><i class="fa fa-hdd-o"></i><span>上传数据库</span></a>
             </li>
-            <li><a href="DBdel.php"><i class="fa fa-home"></i><span>管理个人数据库</span></a>
+            <li><a href="DBdel.php"><i class="fa fa-cogs"></i><span>管理个人数据库</span></a>
             </li>
-            <li><a href="#"><i class="fa fa-smile-o"></i><span>上传计算文件</span></a>
+            <li><a href="#"><i class="fa fa-cloud-upload"></i><span>上传计算文件</span></a>
            	  <ul class="sub-menu">
                 <li><a href="data-upload-static.php">固定参数</a></li>
                 <li><a href="data-upload-dynamic.php">动态参数</a></li>
               </ul>
             </li>
-            <li><a href="molecule-level.php"><i class="fa fa-list-alt"></i><span>分子级分析</span></a>
+            <li><a href="extra.php"><i class="fa fa-flash"></i><span>分子级分析</span></a>
             </li>
           </ul>
         </div>
@@ -129,47 +129,128 @@
                     </select>
                   </div>
                 </div>
+                <div class="header">
+              		<label class="col-sm-3">参数设置</label>
+                  <label class="col-sm-3">MS</label>
+                  <label>MS2</label>
+            		</div>
                 <div class="form-group">
-                  <label class="col-sm-3 control-label">Checkbox</label>
+                  <label class="col-sm-2 control-label"></label>
                   <div class="col-sm-6">
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="0" class="icheck">
-                        Phospho</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">PAT(%)</label>
+                      <div class="col-sm-3">
+                        <input name="PAT" id="PAT" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">FAT(%)</label>
+                      <div class="col-sm-3">
+                        <input name="FAT" id="FAT" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="1" class="icheck">
-                        Acetyl</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPMD(ppm)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMD" id="IPMD" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPMD(ppm)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMD2" id="IPMD2" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="2" class="icheck">
-                        FormylMet</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPACO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPACO" id="IPACO" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPACO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPACO2" id="IPACO2" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="3" class="icheck">
-                        Succinyl</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPMDO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMDO" id="IPMDO" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPMDO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMDO2" id="IPMDO2" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="4" class="icheck">
-                        Meghyl</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPMDOM(ppm)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMDOM" id="IPMDOM" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPMDOM(ppm)</label>
+                      <div class="col-sm-3">
+                        <input name="IPMDOM2" id="IPMDOM2" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="5" class="icheck">
-                        Microcin</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPAD(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPAD" id="IPAD" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPAD(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPAD2" id="IPAD2" type="text" class="form-control">
+                      </div>
                     </div>
-                    <div class="radio">
-                      <label>
-                        <input type="checkbox" name="check[]" value="6" class="icheck">
-                        CoenzymeA</label>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPADO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPADO" id="IPADO" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPADO(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPADO2" id="IPADO2" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">IPADOM(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPADOM" id="IPADOM" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">IPADOM(%)</label>
+                      <div class="col-sm-3">
+                        <input name="IPADOM2" id="IPADOM2" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Window</label>
+                      <div class="col-sm-3">
+                        <input name="Window" id="Window" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-3 control-label">PMFs(%)</label>
+                      <div class="col-sm-3">
+                        <input name="PMFs" id="PMFs" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label"></label>
+                      <div class="col-sm-3">
+                      </div>
+                      <label class="col-sm-3 control-label">PTM_Score</label>
+                      <div class="col-sm-3">
+                        <input name="PTM_Score" id="PTM_Score" type="text" class="form-control">
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label class="col-sm-3 control-label">Spectrum_Range</label>
+                      <div class="col-sm-3">
+                        <input name="Spectrum_Range" id="Spectrum_Range" type="text" class="form-control">
+                      </div>
+                      <label class="col-sm-1 control-label">-</label>
+                      <div class="col-sm-3">
+                        <input name="Spectrum_Range2" id="Spectrum_Range2" type="text" class="form-control">
+                      </div>
                     </div>
                   </div>
                 </div>
-                <button type="submit" class="btn btn-primary">提交</button>
+                <div style="margin-left:40%">
+                <button type="submit" class="btn btn-success">提交</button>
+                </div>
               </form>
             </div>
           </div>
