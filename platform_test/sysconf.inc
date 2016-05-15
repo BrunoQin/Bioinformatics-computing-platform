@@ -7,4 +7,10 @@
 	
 	//IP地址
 	$IP_ADDR="169.254.225.30";
+	
+	//邮箱地址
+	$SMTP_HOST="smtp.163.com";
+	$SMTP_ADDR="howardfans2011@163.com";
+	$SMTP_PWD="112358harriluya";
+	$SMTP_NAME="BIO";
 ?>

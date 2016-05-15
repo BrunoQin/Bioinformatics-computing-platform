@@ -14,6 +14,15 @@
 <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
+<?php
+	if($_SESSION["number"] == "")
+	{
+		echo "<script language='javascript'>";
+		echo "alert('您尚未登录!');";
+		echo "location='login.html';";
+		echo "</script>";
+	}
+?>
 <div id="head-nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
@@ -44,7 +53,7 @@
         <b class="caret"></b></a>
           <ul class="dropdown-menu">
             <li><a href="personal">个人信息</a></li>
-            <li><a href="#">上传记录</a></li>
+            <li><a href="extra.php">上传记录</a></li>
             <li class="divider"></li>
             <li><a href="user/userlgout.php">注销</a></li>
           </ul>

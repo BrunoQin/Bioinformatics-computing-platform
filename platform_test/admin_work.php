@@ -15,6 +15,15 @@
 <link href="assets/css/style.css" rel="stylesheet">
 </head>
 <body>
+<?php
+	if($_SESSION["number"] == "")
+	{
+		echo "<script language='javascript'>";
+		echo "alert('您尚未登录!');";
+		echo "location='login.html';";
+		echo "</script>";
+	}
+?>
 <div id="head-nav" class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
