@@ -20,11 +20,11 @@
 		//记得改，下面这是收件人
 		$to = "2996254124@qq.com";
 		$mail->AddAddress($to);
-		$mail->Subject  = "phpmailer测试标题";
-		$mail->Body = "Platform_test";
+		$mail->Subject  = "作业反馈";
+		$mail->Body = "您上传的作业已计算完毕，计算结果见附件";
 		$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; //当邮件不支持html时备用显示，可以省略
 		$mail->WordWrap   = 80; // 设置每行字符串的长度
-		$mail->AddAttachment("EColi_Rev_NoFrag_50_100_120313_7.txt");  //可以添加附件
+		$mail->AddAttachment("EColi_Rev_NoFrag_50_100_120313_7.txt","result.txt");  //添加附件
 		$mail->IsHTML(true); 
 		$mail->Send();
 	} 

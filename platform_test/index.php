@@ -89,7 +89,13 @@
     </div>
   </div>
   <div id="pcont" class="container-fluid">
-    <div class="cl-mcont">
+    <div class="page-head">
+      <h2>Welcome to Platform-test</h2>
+      <hr>
+      <div class="row">
+      	<div class="col-md-1"></div>
+ 	    		<font size="3">这里放网站简介</font>
+      </div>
     </div>
   </div>
 </div>

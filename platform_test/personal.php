@@ -105,18 +105,18 @@
 									?>
                   </h1>
                   <div class="spk4 pull-right spk-widget"></div>
-            <h5>注册时间：
-            <?php
-							$fdate = date("Y-m-d",$ftime);
-            	echo $fdate;
-						?>
-            </h5>
-            <h5>上次登录时间：
-            <?php
-							$ldate = date("Y-m-d",$ltime);
-            	echo $ldate;
-						?>
-            </h5>
+                  <h5>注册时间：
+                  <?php
+                    $fdate = date("Y-m-d",$ftime);
+                    echo $fdate;
+                  ?>
+                  </h5>
+                  <h5>上次登录时间：
+                  <?php
+                    $ldate = date("Y-m-d",$ltime);
+                    echo $ldate;
+                  ?>
+                  </h5>
                 </div>
               </div>
             </div>

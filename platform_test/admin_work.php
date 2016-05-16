@@ -16,7 +16,7 @@
 </head>
 <body>
 <?php
-	if($_SESSION["number"] == "")
+	if($_SESSION["anum"] == "")
 	{
 		echo "<script language='javascript'>";
 		echo "alert('您尚未登录!');";

@@ -95,7 +95,7 @@
         <div class="col-md-12">
           <div class="block-flat">
             <div class="header">
-              <h3>计算文件上传（静态参数）</h3>
+              <h3>计算文件上传（动态参数）</h3>
             </div>
             <div class="content">
               <form action="upload/data/data-dyn-upload.php" method="POST" style="border-radius: 0px;" class="form-horizontal group-border-dashed" enctype="multipart/form-data">
