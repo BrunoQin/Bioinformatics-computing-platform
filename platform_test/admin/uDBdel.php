@@ -25,7 +25,7 @@
 	}
 	
 	//登录FTP
-	$login = ftp_login($conn,"bio","123456");
+	$login = ftp_login($conn,"bio",$FTPpwd);
 	if(!$login)
 	{
 		echo "<script language='javascript'>";
@@ -39,7 +39,7 @@
 	$chdir3 = ftp_chdir($conn,$fold_name);
 	
 	//删除文件
-	$rmfile = ftp_delete($conn,$user_num."-".$fold_name.".txt");
+	$rmfile = ftp_delete($conn,"A-".$user_num."-".$fold_name.".txt");
 	$rmfile2 = ftp_delete($conn,"para.txt");
 	
 	//删除文件夹

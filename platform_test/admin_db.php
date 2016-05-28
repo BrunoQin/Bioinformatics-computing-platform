@@ -20,7 +20,7 @@
 	{
 		echo "<script language='javascript'>";
 		echo "alert('您尚未登录!');";
-		echo "location='login.html';";
+		echo "location='admin_log.html';";
 		echo "</script>";
 	}
 ?>
@@ -31,28 +31,29 @@
       <a href="#" class="navbar-brand"><span>Platform-test</span></a></div>
     <div class="navbar-collapse collapse">
       <ul class="nav navbar-nav navbar-right user-nav">
-        <li class="dropdown profile_menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle"><img alt="Avatar" src="assets/img/avatar2.jpg"><span>Jeff Hanneman</span><b class="caret"></b></a>
+        <li class="dropdown profile_menu"><a href="#" data-toggle="dropdown" class="dropdown-toggle">
+        <i class="fa fa-user"></i>
+        <span>
+        <?php
+					$anum=$_SESSION["anum"];
+	
+					require_once("sysconf.inc");
+					
+					//连接数据库
+					$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			
+					//选择数据库
+					mysql_select_db($DBNAME);
+					
+					//查询是否存在相应信息
+					$str="select aid from admin where ad_num ='$anum'";
+					$result=mysql_query($str,$linker);
+					list($aid)=mysql_fetch_row($result);
+					echo "$aid";
+        ?>
+        </span>
+        <b class="caret"></b></a>
           <ul class="dropdown-menu">
-            <li><a href="#">My Account</a></li>
-            <li><a href="#">Profile</a></li>
-            <li><a href="#">Messages</a></li>
-            <li class="divider"></li>
-            <li><a href="#">Sign Out</a></li>
-          </ul>
-        </li>
-      </ul>
-      <ul class="nav navbar-nav navbar-right not-nav">
-        <li class="button dropdown"><a href="javascript:;" data-toggle="dropdown" class="dropdown-toggle"><i class="fa fa-globe"></i><span class="bubble">2</span></a>
-          <ul class="dropdown-menu">
-            <li>
-              <div class="nano nscroller">
-                <div class="content">
-                  <ul>
-                    <li><a href="#"><i class="fa fa-cloud-upload info"></i>计算已完成<span class="date">5小时前.</span></a></li>
-                  </ul>
-                </div>
-              </div>
-            </li>
+            <li><a href="user/userlgout.php">注销</a></li>
           </ul>
         </li>
       </ul>
@@ -66,15 +67,8 @@
       <div class="menu-space">
         <div class="content">
           <ul class="cl-vnavigation">
-            <li><a href="index.php"><i class="fa fa-list-alt"></i><span>主页</span></a> </li>
-            <li><a href="DBupload.php"><i class="fa fa-home"></i><span>上传数据库</span></a> </li>
-            <li><a href="#"><i class="fa fa-smile-o"></i><span>上传计算文件</span></a>
-              <ul class="sub-menu">
-                <li><a href="data-upload-static.php">固定参数</a></li>
-                <li><a href="data-upload-dynamic.php">动态参数</a></li>
-              </ul>
-            </li>
-            <li><a href="molecule-level.php"><i class="fa fa-list-alt"></i><span>分子级分析</span></a> </li>
+            <li><a href="admin_db.php"><i class="fa fa-home"></i><span>待客户化数据库</span></a> </li>
+            <li><a href="admin_raw.php"><i class="fa fa-smile-o"></i><span>待计算文件</span></a></li>
           </ul>
         </div>
       </div>
@@ -86,7 +80,7 @@
         <div class="col-md-12">
           <div class="block-flat">
             <div class="header">
-              <h3>待计算作业列表</h3>
+              <h3>待建库文件列表</h3>
             </div>
             <div class="content">
             	<div>
@@ -101,16 +95,16 @@
                   echo "<table id=\"datatable\" class=\"table table-bordered\">";
 									echo "<thead>";
 									echo "<tr>";
-									echo "<th>作业编号</th>";
+									echo "<th>数据库编号</th>";
 									echo "<th>上传者</th>";
-									echo "<th>RAW文件名</th>";
+									echo "<th>数据库文件名</th>";
 									echo "<th>上传时间</th>";
 									echo "<th>操作</th>";
 									echo "</tr>";
 									echo "</thead>";
 									echo "<tbody>";
 									
-									$str="select num,owner,name,time from raw where immd='0'";
+									$str="select num,owner,name,time from datab where immd='0'";
 									$result=mysql_query($str,$linker);
 									
 									while($row=mysql_fetch_array($result))
@@ -122,7 +116,7 @@
                     echo "<td>".$row["owner"]."</td>";
                     echo "<td>".$row["name"]."</td>";
                     echo "<td>".$t."</td>";
-                    echo "<td><a class=\"btn btn-default btn-xs\" href=\"admin/immediate.php?num=".$row["num"]."\" data-toggle=\"tooltip\"><i class=\"fa fa-bolt\"></i>立即执行</a></td>";
+                    echo "<td><a class=\"btn btn-default btn-xs\" href=\"admin/immd_db.php?num=".$row["num"]."\" data-toggle=\"tooltip\"><i class=\"fa fa-bolt\"></i>立即执行</a></td>";
                     echo "</tr>";
 									}
 									echo "</tbody>";

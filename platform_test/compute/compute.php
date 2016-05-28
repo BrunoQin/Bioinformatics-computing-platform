@@ -28,7 +28,9 @@
 	
 	while($row=mysql_fetch_array($result))
 	{
-		//调用批处理脚本进行计算
+		/*调用批处理脚本进行计算
+			exec("start xxx.bat");
+		*/
 			if(compute($row))
 			{
 				//发送邮件

@@ -23,7 +23,7 @@
 	}
 	
 	//登录FTP
-	$login = ftp_login($conn,"bio","123456");
+	$login = ftp_login($conn,"bio",$FTPpwd);
 	if(!$login)
 	{
 		$err_num = 1;
@@ -49,7 +49,7 @@
 	$up_size = $_FILES["file"]["size"];
 	
 	//上传文件
-	$upload = ftp_put($conn,$user_num."-".$t.".txt",$_FILES["file"]["tmp_name"],FTP_BINARY);
+	$upload = ftp_put($conn,"A-".$user_num."-".$t.".txt",$_FILES["file"]["tmp_name"],FTP_BINARY);
 	if(!$upload)
 	{
 		$err_num = 2;
@@ -62,7 +62,7 @@
 		$linker=mysql_connect($DBHOST,$DBUSER,$DBPWD);			//连接数据库
 		mysql_select_db($DBNAME); 		//选择数据库
 		$init=mysql_query("set name utf8");
-		$str="insert into datab values(NULL,'$number','$f_name','".$t."','0')";
+		$str="insert into datab values(NULL,'$number','$f_name','$t','0','0','0')";
 		$result=mysql_query($str, $linker); //执行查询
 				
 		$str2="update users set dnum=dnum+1 where number ='$number'";

@@ -11,7 +11,7 @@
 	mysql_close($linker);
 	
 	echo "<script language='javascript'>";
-	echo "location='../admin_work.php'";
+	echo "location='../admin_raw.php'";
 	echo "</script>";
 
 ?>

@@ -13,4 +13,7 @@
 	$SMTP_ADDR="howardfans2011@163.com";
 	$SMTP_PWD="112358harriluya";
 	$SMTP_NAME="BIO";
+	
+	//FTP全局变量
+	$FTPpwd="123456";
 ?>

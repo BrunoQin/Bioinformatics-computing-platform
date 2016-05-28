@@ -22,7 +22,7 @@
 		
 		//转到个人页面	
 		echo "<script language='javascript'>";	
-		echo "location='../admin_work.php?anum=".$anum."';";
+		echo "location='../admin_db.php';";
 		echo "</script>";
 	}
 	//密码输入错误

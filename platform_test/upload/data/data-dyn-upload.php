@@ -9,7 +9,7 @@
 	
 	//系统配置文件
 	require_once("../../sysconf.inc");
-		
+	
 	//获取时间戳
 	$t = time();
 	
@@ -50,7 +50,7 @@
 	}
 	
 	//登录FTP
-	$login = ftp_login($conn,"bio","123456");
+	$login = ftp_login($conn,"bio",$FTPpwd);
 	if(!$login)
 	{
 		$err_num = 1;
@@ -72,7 +72,7 @@
 	$chdir_t = ftp_chdir($conn,$t);
 	
 	//上传文件
-	$upload = ftp_put($conn,$user_num."-".$t.".RAW",$_FILES["file"]["tmp_name"],FTP_BINARY);
+	$upload = ftp_put($conn,"A-".$user_num."-".$t.".RAW",$_FILES["file"]["tmp_name"],FTP_BINARY);
 	
 	//临时文件信息
 	$up_err = $_FILES["file"]["error"];
